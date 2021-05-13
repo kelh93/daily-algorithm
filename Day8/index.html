@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实现简单的双向数据绑定</title>
+</head>
+<body>
+  <p>1. 基于Object.defineProperty</p>
+  <input type="text" id='obj1' oninput="setInput1()" />
+  <p id="val1">input1: </p>
+  <p>2. 基于Proxy 实现</p>
+  <input type="text" id='obj2' oninput="setInput2()" />
+  <p id="val2">input2: </p>
+  <script type="text/javascript">
+    function setInput1(){
+      const input1 = document.getElementById('obj1');
+      const p1 = document.getElementById('val1');
+      const obj1 = { val1: '' };
+      Object.defineProperty(obj1, 'val1',{
+        get(){
+          return input1.value;
+        },
+        set(newVal){
+          this.val1 = newVal;
+        }
+      });
+      p1.innerText = `input1: ${obj1.val1}`;
+    }
+    function setInput2(){
+      const input1 = document.getElementById('obj2');
+      const p1 = document.getElementById('val2');
+      const obj2 = {val2: ''};
+      const proxy = new Proxy(obj2, {
+        get(target, propKey, receiver){
+          return input1.value;
+        },
+        set(target, propKey, value, receiver){
+          target['val2'] = value;
+        }
+      });
+      p1.innerHTML = `input2: ${proxy.val2}`;
+    }
+  </script>
+</body>
+</html>
