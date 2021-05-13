@@ -18,6 +18,7 @@
       const input1 = document.getElementById('obj1');
       const p1 = document.getElementById('val1');
       const obj1 = { val1: '' };
+      //get,set设置了以后就无法设置writeable和value
       Object.defineProperty(obj1, 'val1',{
         get(){
           return input1.value;
