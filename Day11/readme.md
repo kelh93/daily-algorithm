@@ -265,3 +265,28 @@ private int calculateLen(ListNode head){
 ## 复杂度分析
 时间复杂度 O(N)
 空间复杂度 O(1)
+
+
+## 思路
+方法一： Hash
+用map记录出现过的节点，当再次遇到相同节点时，即出现了环。
+
+## 代码
+```javascript
+var detectCycle = function (head) {
+  const hasVisited = new Map();
+  while (head != null) {
+    if (hasVisited.has(head)) {
+      return head;
+    }
+    head = head.next;
+  }
+};
+```
+
+## 复杂度分析
+T: O(n); // n次遍历,程序执行了n次。
+S: O(n); // map使用了n个空间。
+
+
+
