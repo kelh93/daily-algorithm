@@ -1,8 +1,3 @@
-## 思路
-哈希map ＋ 双向链表。实现查找和插入都是O(1)的复杂度
-
-## 代码 （翻译python）
-
 class DLinkedNode {
   constructor(key = 0, value = 0) {
     this.key = key;
@@ -67,7 +62,3 @@ class LRUCache {
     return node;
   }
 }
-
-## 复杂度分析
-T: O(1)
-S: O(capacity)
